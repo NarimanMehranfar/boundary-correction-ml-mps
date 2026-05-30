@@ -2,4 +2,4 @@
 
 ## Neural Network Architecture
 
-![Neural Network Architecture](Network (2).pdf)
+[View Network Architecture](/network_architecture.pdf)
