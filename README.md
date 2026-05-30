@@ -1,7 +1,13 @@
 # ML-Based Boundary Treatment for MPS
 
+This repository accompanies the paper:
+
+> **A Machine Learning-based Solid Boundary Treatment for Meshfree Particle Methods**
+> Nariman Mehranfar, Ahmad Shakibaeinia
+> *Department of Civil, Geological, and Mining Engineering, Polytechnique Montréal, Montreal, Canada*
+
 Inference-only workflow for the trained neural networks that predict the
-ghost-particle contribution to SPH differential operators. Training is **not**
+ghost-particle contribution to MPS differential operators. Training is **not**
 included: the trained `.h5` models are loaded, run on the test data, and their
 predictions are compared against ground truth.
 
@@ -57,14 +63,12 @@ This repository performs inference only — it rebuilds each network from its
 
 | File | What it is |
 |------|------------|
-| `dataForTrainingAndValidation.tar.xz` | Compressed training+validation data. **Must be extracted to `dataForTrainingAndValidation.csv` before step 1.** Used only to fit the normalization coefficients. |
+| `dataForTrainingAndValidation.tar.xz` | Compressed training+validation data (~1.2 GB) — **hosted externally** (too large for the repository): download it from [Zenodo](https://zenodo.org/records/20455453), place it in `data/`, and **extract it to `dataForTrainingAndValidation.csv` before step 1.** Used only to fit the normalization coefficients. |
 | `test_near_wall.csv` | Near-wall test particles — the points that are actually predicted and scored. |
 | `test_not_near_wall.csv` | Background (non-near-wall) points, used only as context in the spatial plots. |
 | `feature_description.md` | Reference description of the input/output columns. |
 
 The test data here corresponds to **Case 1** (the predefined-field case) used for the prediction test.
-
-![test case field](figs/preview.webp)
 
 ### Models (`model/`)
 
@@ -95,7 +99,8 @@ operator's output columns:
 ## 2. How to run
 
 ```bash
-# 1. Extract the training data (one time)
+# 1. Get the training data (one time): download dataForTrainingAndValidation.tar.xz
+#    from https://zenodo.org/records/20455453 into data/, then extract it
 cd data
 tar -xf dataForTrainingAndValidation.tar.xz      # -> dataForTrainingAndValidation.csv
 cd ..
@@ -172,3 +177,44 @@ Python packages by step:
   **TensorFlow 2.14**, the version the models were trained with (Keras 2.x `.h5`).
   Because the models are loaded with `compile=False`, the custom training
   loss/metrics and `tensorflow_addons` (AdamW) are **not** required for inference.
+
+---
+
+## How to cite
+
+If you use this code, the trained models, or the dataset, please cite the paper
+and the dataset.
+
+**Paper**
+
+> Mehranfar, N., & Shakibaeinia, A. (2025). *A Machine Learning-based Solid
+> Boundary Treatment for Meshfree Particle Methods.*
+
+```bibtex
+@article{mehranfar2025mlboundary,
+  title   = {A Machine Learning-based Solid Boundary Treatment for Meshfree Particle Methods},
+  author  = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
+  year    = {2025},
+  % --- fill in once published: ---
+  % journal = {},
+  % volume  = {},
+  % pages   = {},
+  % doi     = {},
+  % --- or cite the arXiv preprint instead: ---
+  % eprint        = {2510.17813},
+  % archivePrefix = {arXiv},
+}
+```
+
+**Dataset (Zenodo)**
+
+```bibtex
+@dataset{mehranfar2025dataset,
+  title     = {Training and validation data for ML-based boundary treatment in MPS},
+  author    = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
+  year      = {2025},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.20455453},
+  url       = {https://zenodo.org/records/20455453}
+}
+```
