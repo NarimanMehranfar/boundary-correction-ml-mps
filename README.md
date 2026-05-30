@@ -104,7 +104,9 @@ operator's output columns:
 # 1. Get the training data (one time): download dataForTrainingAndValidation.tar.xz
 #    from https://zenodo.org/records/20455453 into data/, then extract it
 cd data
-tar -xf dataForTrainingAndValidation.tar.xz      # -> dataForTrainingAndValidation.csv
+wget -O dataForTrainingAndValidation.tar.xz \
+  "https://zenodo.org/records/20455453/files/dataForTrainingAndValidation.tar.xz?download=1"
+tar -xf dataForTrainingAndValidation.tar.xz
 cd ..
 
 # 2. Compute normalization coefficients for all five operators (run once)
