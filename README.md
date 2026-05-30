@@ -70,6 +70,8 @@ This repository performs inference only — it rebuilds each network from its
 
 The test data here corresponds to **Case 1** (the predefined-field case) used for the prediction test.
 
+![test case field](figs/preview.webp)
+
 ### Models (`model/`)
 
 Trained Keras networks, one **pair** per operator: the full model `<stem>.h5`
