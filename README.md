@@ -1,11 +1,7 @@
 # ML-Based Boundary Treatment for MPS
 
-## Neural Network Architecture
-
-![Network Architecture](figs/network_architecture.png)
-
 Inference-only workflow for the trained neural networks that predict the
-ghost-particle contribution to MPS differential operators. Training is **not**
+ghost-particle contribution to SPH differential operators. Training is **not**
 included: the trained `.h5` models are loaded, run on the test data, and their
 predictions are compared against ground truth.
 
@@ -14,6 +10,36 @@ The five operators (referred to below as `<operator>`) are:
 ```
 n0 | gradientScalar | laplacianScalar | divergenceVector | laplacianVector
 ```
+## Neural Network Architecture
+
+![Network Architecture](figs/network_architecture.png)
+
+Each operator has its own trained network: a hybrid **CNN–MLP** that predicts the
+boundary correction term $\hat{B}_i$ — the contribution that the ghost particles
+would have supplied to the MPS approximation of that operator at a near-wall
+particle $i$. The full operator value is then recovered as $A_i + \hat{B}_i$,
+where $A_i$ is the contribution of the surrounding fluid and wall particles. The
+network is fed two kinds of input: a set of per-neighbour *stencil* sequences for
+the CNN, and one flat (*wide*) vector of all physics-inspired features for the
+MLP.
+
+The CNN acts as a local feature extractor over the $N = 9$ nearest wall
+particles. Each per-neighbour feature is arranged as a length-9 sequence (6 such
+sequences for number density `n0`, 11 for the scalar operators, and 12 for the
+vector operators), and these pass through three 1-D convolutional layers (three
+filters of size 3 each) followed by two dense layers of 64 and 32 units. The
+flattened result is concatenated with the wide feature vector — fusing the
+learned geometric pattern with the raw physics features — and passed to a
+four-layer MLP predictor (128 → 64 → 32 → 16 → output). The feature extractor
+uses `ELU` activations and the predictor uses `ReLU`, with `He normal` kernel
+initialisation and a linear output that is scalar or vector depending on the
+operator.
+
+The size of the wide input vector differs per operator and is exactly what each
+loaded `.h5` model expects: 61 for `n0`, 109 for `gradientScalar`, 108 for
+`laplacianScalar`, 118 for `divergenceVector`, and 119 for `laplacianVector`.
+This repository performs inference only — it rebuilds each network from its
+`.h5` files and runs it; the training procedure is not included.
 
 ---
 
@@ -35,6 +61,10 @@ n0 | gradientScalar | laplacianScalar | divergenceVector | laplacianVector
 | `test_near_wall.csv` | Near-wall test particles — the points that are actually predicted and scored. |
 | `test_not_near_wall.csv` | Background (non-near-wall) points, used only as context in the spatial plots. |
 | `feature_description.md` | Reference description of the input/output columns. |
+
+The test data here corresponds to **Case 1** (the predefined-field case) used for the prediction test.
+
+![test case field](figs/preview.webp)
 
 ### Models (`model/`)
 
