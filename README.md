@@ -190,14 +190,14 @@ and the dataset.
 
 **Paper**
 
-> Mehranfar, N., & Shakibaeinia, A. (2025). *A Machine Learning-based Solid
+> Mehranfar, N., & Shakibaeinia, A. (2026). *A Machine Learning-based Solid
 > Boundary Treatment for Meshfree Particle Methods.*
 
 ```bibtex
-@article{mehranfar2025mlboundary,
+@article{mehranfar2026mlboundary,
   title   = {A Machine Learning-based Solid Boundary Treatment for Meshfree Particle Methods},
   author  = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
-  year    = {2025},
+  year    = {2026},
   % --- fill in once published: ---
   % journal = {},
   % volume  = {},
@@ -212,10 +212,10 @@ and the dataset.
 **Dataset (Zenodo)**
 
 ```bibtex
-@dataset{mehranfar2025dataset,
+@dataset{mehranfar2026dataset,
   title     = {Training and validation data for ML-based boundary treatment in MPS},
   author    = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
-  year      = {2025},
+  year      = {2026},
   publisher = {Zenodo},
   doi       = {10.5281/zenodo.20455453},
   url       = {https://zenodo.org/records/20455453}
