@@ -198,9 +198,9 @@ and the dataset.
   title   = {A Machine Learning-based Solid Boundary Treatment for Meshfree Particle Methods},
   author  = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
   year    = {2026},
-  % journal = {Engineering Analysis with Boundary Elements},
-  % volume  = {190},
-  % doi     = {https://doi.org/10.1016/j.enganabound.2026.106847},
+  journal = {Engineering Analysis with Boundary Elements},
+  volume  = {190},
+  doi     = {https://doi.org/10.1016/j.enganabound.2026.106847},
 }
 ```
 
