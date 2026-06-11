@@ -199,13 +199,9 @@ and the dataset.
   author  = {Mehranfar, Nariman and Shakibaeinia, Ahmad},
   year    = {2026},
   % --- fill in once published: ---
-  % journal = {},
-  % volume  = {},
-  % pages   = {},
-  % doi     = {},
-  % --- or cite the arXiv preprint instead: ---
-  % eprint        = {2510.17813},
-  % archivePrefix = {arXiv},
+  % journal = {Engineering Analysis with Boundary Elements},
+  % volume  = {190},
+  % doi     = {https://doi.org/10.1016/j.enganabound.2026.106847},
 }
 ```
 
